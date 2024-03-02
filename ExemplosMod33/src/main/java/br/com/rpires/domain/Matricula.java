@@ -14,45 +14,35 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- * @author rodrigo.pires
- *
- */
 @Entity
 @Table(name = "TB_MATRICULA")
 public class Matricula {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="matri_seq")
-	@SequenceGenerator(name="matri_seq", sequenceName="sq_matricula", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matri_seq")
+	@SequenceGenerator(name = "matri_seq", sequenceName = "sq_matricula", initialValue = 1, allocationSize = 1)
 	private Long id;
-	
+
 	@Column(name = "CODIGO", length = 10, nullable = false, unique = true)
 	private String codigo;
-	
+
 	@Column(name = "DATA_MATRICULA", nullable = false)
 	private Instant dataMatricula;
-	
+
 	@Column(name = "valor", nullable = false)
 	private Double valor;
-	
+
 	@Column(name = "status", nullable = false)
 	private String status;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "id_curso_fk", 
-		foreignKey = @ForeignKey(name = "fk_curso_matricula"), 
-		referencedColumnName = "id", nullable = false
-	)
+	@JoinColumn(name = "id_curso_fk", foreignKey = @ForeignKey(name = "fk_curso_matricula"), referencedColumnName = "id", nullable = false)
 	private Curso curso;
-	
+
 	@OneToOne
-	@JoinColumn(name = "id_aluno_fk", 
-		foreignKey = @ForeignKey(name = "fk_aluno_matricula"), 
-		referencedColumnName = "id", nullable = false
-	)	
+	@JoinColumn(name = "id_aluno_fk", foreignKey = @ForeignKey(name = "fk_aluno_matricula"), referencedColumnName = "id", nullable = false)
 	private Aluno aluno;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -108,6 +98,5 @@ public class Matricula {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
 
 }

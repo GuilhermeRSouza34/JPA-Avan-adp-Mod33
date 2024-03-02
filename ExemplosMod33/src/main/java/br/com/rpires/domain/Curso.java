@@ -15,31 +15,27 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- * @author rodrigo.pires
- *
- */
 @Entity
 @Table(name = "TB_CURSO")
 public class Curso {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="curso_seq")
-	@SequenceGenerator(name="curso_seq", sequenceName="sq_curso", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curso_seq")
+	@SequenceGenerator(name = "curso_seq", sequenceName = "sq_curso", initialValue = 1, allocationSize = 1)
 	private Long id;
-	
+
 	@Column(name = "CODIGO", length = 10, nullable = false, unique = true)
 	private String codigo;
-	
+
 	@Column(name = "NOME", length = 50, nullable = false)
 	private String nome;
-	
+
 	@Column(name = "DESCRICAO", length = 100, nullable = false)
 	private String descricao;
-	
+
 	@OneToMany(mappedBy = "curso")
 	private List<Matricula> matriculas;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -80,5 +76,4 @@ public class Curso {
 		this.matriculas = matriculas;
 	}
 
-	
 }

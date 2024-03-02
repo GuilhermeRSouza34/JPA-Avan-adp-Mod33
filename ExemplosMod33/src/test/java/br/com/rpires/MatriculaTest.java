@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.rpires;
 
 import static org.junit.Assert.assertEquals;
@@ -23,20 +21,16 @@ import br.com.rpires.domain.Computador;
 import br.com.rpires.domain.Curso;
 import br.com.rpires.domain.Matricula;
 
-/**
- * @author rodrigo.pires
- *
- */
 public class MatriculaTest {
-	
+
 	private IMatriculaDao matriculaDao;
-	
+
 	private ICursoDao cursoDao;
-	
+
 	private IAlunoDao alunoDao;
-	
+
 	private IComputadorDao computadorDao;
-	
+
 	public MatriculaTest() {
 		matriculaDao = new MatriculaDao();
 		cursoDao = new CursoDao();
@@ -48,7 +42,7 @@ public class MatriculaTest {
 	public void cadastrar() {
 		Curso curso = criarCurso("A1");
 		Aluno aluno = criarAluno("A1");
-		
+
 		Matricula mat = new Matricula();
 		mat.setCodigo("A1");
 		mat.setDataMatricula(Instant.now());
@@ -56,28 +50,28 @@ public class MatriculaTest {
 		mat.setValor(2000d);
 		mat.setCurso(curso);
 		mat.setAluno(aluno);
-		
+
 		aluno.setMatricula(mat);
 		mat = matriculaDao.cadastrar(mat);
-		
+
 		assertNotNull(mat);
 		assertNotNull(mat.getId());
-		
+
 		Matricula matBD = matriculaDao.buscarPorCodigoCurso(mat.getCodigo());
 		assertNotNull(matBD);
 		assertEquals(mat.getId(), matBD.getId());
-		
+
 		Matricula matBDObj = matriculaDao.buscarPorCurso(curso);
 		assertNotNull(matBDObj);
 		assertEquals(mat.getId(), matBDObj.getId());
 	}
-	
+
 	private Computador criarComputador(String codigo) {
 		Computador comp = new Computador();
 		comp.setCodigo(codigo);
 		comp.setDescricao("Comp 1");
 		return comp;
-		//return computadorDao.cadastrar(comp);
+		// return computadorDao.cadastrar(comp);
 	}
 
 	private Aluno criarAluno(String codigo) {
@@ -88,8 +82,8 @@ public class MatriculaTest {
 		aluno.setNome("Rodrigo");
 		aluno.add(comp);
 		aluno.add(comp2);
-		//comp.add(aluno);
-		//comp2.add(aluno);
+		// comp.add(aluno);
+		// comp2.add(aluno);
 		return alunoDao.cadastrar(aluno);
 	}
 
